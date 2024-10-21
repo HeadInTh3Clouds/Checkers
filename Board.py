@@ -35,7 +35,7 @@ class Board:
                 )
         return output
 
-    def get_title_from_pos(self, pos):
+    def get_tile_from_pos(self, pos):
         for tile in self.tile_list:
             if (tile.x, tile.y) == (pos[0], pos[1]):
                 return tile
@@ -43,7 +43,7 @@ class Board:
     def _setup(self):
         for y_index, row in enumerate(self.config):
             for x_index, x in enumerate(row):
-                tile = self.get_title_from_pos((x_index, y_index))
+                tile = self.get_tile_from_pos((x_index, y_index))
                 if x != '':
                     if x[-1] == 'p':
                         color = 'black' if x[0] == 'b' else 'red'
@@ -52,15 +52,15 @@ class Board:
     def handle_click(self, pos):
         x, y = pos[0], pos[-1]
         if x >= self.board_size or y >= self.board_size:
-            x = x // self.title_width
-            y = y // self.title_height
-        clicked_tile = self.get_title_from_pos((x, y))
+            x = x // self.tile_width
+            y = y // self.tile_height
+        clicked_tile = self.get_tile_from_pos((x, y))
 
         if self.chosen_piece is None:
             if clicked_tile.current_piece is not None:
                 if clicked_tile.current_piece.color == self.turn:
                     self.chosen_piece = clicked_tile.current_piece
-        elif self.currnet_piece._move(clicked_tile):
+        elif self.chosen_piece._move(clicked_tile):
             if not self.is_jump:
                 self.turn = 'red' if self.turn == 'black' else 'black'
             else:
@@ -72,7 +72,7 @@ class Board:
 
     def draw(self, display):
         if self.chosen_piece is not None:
-            self.get_title_from_pos(self.chosen_piece.pos).highlight = True
+            self.get_tile_from_pos(self.chosen_piece.pos).highlight = True
             if not self.is_jump:
                 for tile in self.chosen_piece.valid_moves():
                     tile.highlight = True

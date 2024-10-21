@@ -40,7 +40,7 @@ class Checker(Piece):
             else:
                 tile = self.board.get_tile_from_pos(tile_pos)
                 if self.board.turn == self.color:
-                    if tile.currnet_piece != None and tile.current_piece.color != self.color:
+                    if tile.current_piece != None and tile.current_piece.color != self.color:
                         next_pos = (tile_pos[0] + move[0], tile_pos[-1] + move[-1])
                         next_tile = self.board.get_tile_from_pos(next_pos)
                         if next_pos[0] < [0] or next_pos[0] > 7 or next_pos[-1] < 0 or next_pos[-1] > 7:

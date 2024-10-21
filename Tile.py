@@ -10,7 +10,7 @@ class Tile:
         self.abs_x = x * tile_width
         self.abs_y = y * tile_height
         self.abs_pos = (self.abs_x, self.abs_y)
-        self.color = 'light' if (x, y) % 2 == 0 else 'dark'
+        self.color = 'light' if (x + y) % 2 == 0 else 'dark'
         self.draw_color = (220, 189, 194) if self.color == 'light' else (53, 53, 53)
         self.highlight_color = (100, 249, 83) if self.color == 'light' else (0, 228, 10)
         self.current_piece = None
@@ -25,7 +25,7 @@ class Tile:
 
     def get_coord(self):
         columns = 'abcdefgh'
-        return columns[self.x] + srt(self.y +1)
+        return columns[self.x] + str(self.y +1)
     
     def draw(self, display):
         if self.highlight:

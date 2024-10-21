@@ -36,7 +36,7 @@ class Piece:
                     jumped_piece = move[-1]
                     self.pos, self.x, self.y = tile.pos, tile.x, tile.y
                     prev_tile.current_piece = None
-                    jumped_piece.chosen_piece = None
+                    jumped_piece.current_piece = None
                     tile.current_piece = self
                     self.board.chosen_piece = None
                     self.has_moved = True
