@@ -12,7 +12,7 @@ class Double(Piece):
     def _possible_moves(self):
         possible_moves = ((-1, -1), (+1, -1), (-1, +1), (+1, +1))
         return possible_moves
-    
+
     def valid_moves(self):
         tile_moves = []
         moves = self._possible_moves()
@@ -22,7 +22,7 @@ class Double(Piece):
                 pass
             else:
                 tile = self.board.get_tile_from_pos(tile_pos)
-                if tile.current_piece == None:
+                if tile.occupying_piece == None:
                     tile_moves.append(tile)
         return tile_moves
 
@@ -36,12 +36,12 @@ class Double(Piece):
             else:
                 tile = self.board.get_tile_from_pos(tile_pos)
                 if self.board.turn == self.color:
-                    if tile.current_piece != None and tile.current_piece.color != self.color:
+                    if tile.occupying_piece != None and tile.occupying_piece.color != self.color:
                         next_pos = (tile_pos[0] + move[0], tile_pos[-1] + move[-1])
-                        next_tile = self.board.get_tile_from_pos(next_pos)
-                        if next_pos[0] < [0] or next_pos[0] > 7 or next_pos[-1] < 0 or next_pos[-1] > 7:
+                        next_tile = self.board.get_tile_from_pos(next_pos)		
+                        if next_pos[0] < 0 or next_pos[0] > 7 or next_pos[-1] < 0 or next_pos[-1] > 7:
                             pass
                         else:
-                            if next_tile.current_piece == None:
+                            if next_tile.occupying_piece == None:
                                 tile_jumps.append((next_tile, tile))
-            return tile_jumps
+        return tile_jumps

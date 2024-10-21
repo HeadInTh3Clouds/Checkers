@@ -13,7 +13,7 @@ class Tile:
         self.color = 'light' if (x + y) % 2 == 0 else 'dark'
         self.draw_color = (220, 189, 194) if self.color == 'light' else (53, 53, 53)
         self.highlight_color = (100, 249, 83) if self.color == 'light' else (0, 228, 10)
-        self.current_piece = None
+        self.occupying_piece = None
         self.coord = self.get_coord()
         self.highlight = False
         self.rect = pygame.Rect(
@@ -25,15 +25,15 @@ class Tile:
 
     def get_coord(self):
         columns = 'abcdefgh'
-        return columns[self.x] + str(self.y +1)
-    
+        return columns[self.x] + str(self.y + 1)
+
     def draw(self, display):
         if self.highlight:
             pygame.draw.rect(display, self.highlight_color, self.rect)
         else:
             pygame.draw.rect(display, self.draw_color, self.rect)
-            
-        if self.current_piece != None:
-            centering_rect = self.current_piece.img.get_rect()
+
+        if self.occupying_piece != None:
+            centering_rect = self.occupying_piece.img.get_rect()
             centering_rect.center = self.rect.center
-            display.blit(self.current_piece.img, centering_rect.topleft)
+            display.blit(self.occupying_piece.img, centering_rect.topleft)

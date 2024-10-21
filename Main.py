@@ -26,16 +26,15 @@ class Checkers:
                 if self.event.type == pygame.QUIT:
                     self.running = False
 
-            if not game.is_game_over(board):
-                if self.event.type == pygame.MOUSEBUTTONDOWN:
-                    board.handle_click(self.event.pos)
-
-            else:
-                game.message()
-                self.running = False
+                if not game.is_game_over(board):
+                    if self.event.type == pygame.MOUSEBUTTONDOWN:
+                        board.handle_click(self.event.pos)
+                else:
+                    game.message()
+                    self.running = False
 
             self._draw(board)
-            self.FPS.tick(100)
+            self.FPS.tick(60)
 
 if __name__ == "__main__":
     window_size = (640, 640)

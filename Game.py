@@ -11,8 +11,8 @@ class Game:
         for y in range(board.board_size):
             for x in range(board.board_size):
                 tile = board.get_tile_from_pos((x, y))
-                if tile.current_piece != None:
-                    if tile.current_piece.color == 'red':
+                if tile.occupying_piece != None:
+                    if tile.occupying_piece.color == 'red':
                         red_piece += 1
                     else:
                         black_piece += 1
@@ -29,15 +29,15 @@ class Game:
     def check_jump(self, board):
         piece = None
         for tile in board.tile_list:
-            if tile.current_piece != None:
-                piece = tile.current_piece
+            if tile.occupying_piece != None:
+                piece = tile.occupying_piece
                 if len(piece.valid_jumps()) != 0 and board.turn == piece.color:
                     board.is_jump = True
                     break
                 else:
                     board.is_jump = False
         if board.is_jump:
-            board.chosen_piece = piece
+            board.selected_piece = piece
             board.handle_click(piece.pos)
         return board.is_jump
     

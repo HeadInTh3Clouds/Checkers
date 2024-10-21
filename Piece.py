@@ -16,15 +16,15 @@ class Piece:
         if tile in self.valid_moves() and not self.board.is_jump:
             prev_tile = self.board.get_tile_from_pos(self.pos)
             self.pos, self.x, self.y, = tile.pos, tile.x, tile.y
-            prev_tile.current_piece = None
-            tile.current_piece = self
-            self.board.chosen_piece = None
+            prev_tile.occupying_piece = None
+            tile.occupying_piece = self
+            self.board.selected_piece = None
             self.has_moved = True
 
             if self.notation == 'p':
                 if self.y == 0 or self.y == 7:
                     from Double import Double
-                    tile.current_piece = Double(
+                    tile.occupying_piece = Double(
                         self.x, self.y, self.color, self.board
                     )
             return True
@@ -35,19 +35,19 @@ class Piece:
                     prev_tile = self.board.get_tile_from_pos(self.pos)
                     jumped_piece = move[-1]
                     self.pos, self.x, self.y = tile.pos, tile.x, tile.y
-                    prev_tile.current_piece = None
-                    jumped_piece.current_piece = None
-                    tile.current_piece = self
-                    self.board.chosen_piece = None
+                    prev_tile.occupying_piece = None
+                    jumped_piece.occupying_piece = None
+                    tile.occupying_piece = self
+                    self.board.selected_piece = None
                     self.has_moved = True
                     #Promotion
                     if self.notation == 'p':
                         if self.y == 0 or self.y == 7:
                             from Double import Double
-                            tile.current_piece = Double(
+                            tile.occupying_piece = Double(
                                 self.x, self.y, self.color, self.board
                             )
                     return True
         else:
-            self.board.chosen_piece = None
+            self.board.selected_piece = None
             return False
